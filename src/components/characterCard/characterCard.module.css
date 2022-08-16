@@ -1,8 +1,17 @@
 .characterImg {
-    width: 100px;
+    width: 250px;
 }
 
 .card {
-    padding: 16px;
+    width: 250px;
+    margin: 16px;
     cursor: pointer;
+    border: 1px solid;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.nameContainer {
+    padding: 4px 8px;
+    background-color: white;
 }

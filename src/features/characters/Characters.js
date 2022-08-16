@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCharacters, selectData, selectPage } from "./charactersSlice";
+import {
+    fetchCharacters,
+    selectData,
+    selectIsLoading,
+    selectPage,
+} from "./charactersSlice";
 import styles from "./Characters.module.css";
 import CharacterCard from "../../components/characterCard";
 import Pagination from "../../components/pagination";
@@ -8,6 +13,7 @@ import Pagination from "../../components/pagination";
 export function Characters() {
     const data = useSelector(selectData);
     const page = useSelector(selectPage);
+    const isLoading = useSelector(selectIsLoading);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -26,20 +32,27 @@ export function Characters() {
 
     return (
         <div className={styles.container}>
-            <Pagination />
-            <div className={styles.cardContainer}>
-                {data.map((character) => {
-                    const { id, url } = getImageURL(character.url);
-                    return (
-                        <CharacterCard
-                            imgUrl={url}
-                            name={character.name}
-                            id={id}
-                            key={url}
-                        />
-                    );
-                })}
+            <div className={styles.paginationContainer}>
+                <Pagination />
             </div>
+            {isLoading && (
+                <div className={styles.loading}> Loading Content...</div>
+            )}
+            {!isLoading && (
+                <div className={styles.cardContainer}>
+                    {data.map((character) => {
+                        const { id, url } = getImageURL(character.url);
+                        return (
+                            <CharacterCard
+                                imgUrl={url}
+                                name={character.name}
+                                id={id}
+                                key={url}
+                            />
+                        );
+                    })}
+                </div>
+            )}
         </div>
     );
 }

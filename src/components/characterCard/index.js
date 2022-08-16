@@ -10,7 +10,9 @@ const CharacterCard = ({ imgUrl, name, id }) => {
     return (
         <div onClick={() => handleCardClick(id)} className={styles.card}>
             <img className={styles.characterImg} src={imgUrl} alt="character" />
-            <p>{name}</p>
+            <div className={styles.nameContainer}>
+                <p>{name}</p>
+            </div>
         </div>
     );
 };
