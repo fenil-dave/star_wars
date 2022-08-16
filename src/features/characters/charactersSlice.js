@@ -49,7 +49,7 @@ export const charactersSlice = createSlice({
     },
 });
 
-export const { addData, setLoading } = charactersSlice.actions;
+export const { addData, setLoading, setPage } = charactersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -59,5 +59,7 @@ export const selectData = (state) => state.characters.data;
 export const selectIsLoading = (state) => state.characters.isLoading;
 
 export const selectPage = (state) => state.characters.page;
+
+export const selectTotal = (state) => state.characters.total;
 
 export default charactersSlice.reducer;

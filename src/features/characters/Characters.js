@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCharacters, selectData, selectPage } from "./charactersSlice";
 import styles from "./Characters.module.css";
 import CharacterCard from "../../components/characterCard";
+import Pagination from "../../components/pagination";
 
 export function Characters() {
     const data = useSelector(selectData);
@@ -25,12 +26,20 @@ export function Characters() {
 
     return (
         <div className={styles.container}>
-            {data.map((character) => {
-                const { id, url } = getImageURL(character.url);
-                return (
-                    <CharacterCard imgUrl={url} name={character.name} id={id} />
-                );
-            })}
+            <Pagination />
+            <div className={styles.cardContainer}>
+                {data.map((character) => {
+                    const { id, url } = getImageURL(character.url);
+                    return (
+                        <CharacterCard
+                            imgUrl={url}
+                            name={character.name}
+                            id={id}
+                            key={url}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 }
